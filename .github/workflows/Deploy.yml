@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "main" ]
   pull_request:
-    types:  [ opened, reopened ]
+    types:  [ opened, synchronize, reopened ]
     branches: [ "main" ]
 
 jobs:
@@ -35,8 +35,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew build sonarqube --info
-        run: ./gradle test jacocoTestReport sonarqube
+        run: |
+            chmod 777 ./gradlew
+            ./gradlew build sonarqube --info
+            ./gradle test jacocoTestReport sonarqube
   
   build:
   
