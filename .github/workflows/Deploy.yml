@@ -38,7 +38,7 @@ jobs:
         run: |
             chmod 777 ./gradlew
             ./gradlew build sonarqube --info
-            ./gradle test jacocoTestReport sonarqube
+            ./gradlew test jacocoTestReport sonarqube
   
   build:
   
